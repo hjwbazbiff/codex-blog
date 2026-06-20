@@ -6,6 +6,7 @@ $ErrorActionPreference = "Stop"
 $SkillDir = Join-Path $CodexHome "skills"
 $AgentDir = Join-Path $CodexHome "agents"
 $PluginDir = Join-Path (Join-Path $CodexHome "plugins") "codex-blog"
+$RuntimeDir = Join-Path (Join-Path $SkillDir "blog") ".venv"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 Write-Host "Codex Blog installer"
@@ -28,7 +29,7 @@ $python = Get-Command python -ErrorAction SilentlyContinue
 if ($python) {
     $tempDir = New-Item -ItemType Directory -Force -Path (Join-Path ([System.IO.Path]::GetTempPath()) ("codex-blog-" + [guid]::NewGuid().ToString()))
     $bootstrapJsonPath = Join-Path $tempDir "bootstrap-result.json"
-    & $python.Source (Join-Path $ScriptDir "scripts/bootstrap_environment.py") --venv (Join-Path (Join-Path (Join-Path $SkillDir "blog") ".venv")) --json --json-output $bootstrapJsonPath | Out-Null
+    & $python.Source (Join-Path $ScriptDir "scripts/bootstrap_environment.py") --venv $RuntimeDir --json --json-output $bootstrapJsonPath | Out-Null
     Write-Host "Bootstrap summary: $bootstrapJsonPath"
 }
 

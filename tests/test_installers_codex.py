@@ -14,6 +14,12 @@ def test_installers_use_codex_home_and_not_legacy_paths():
         assert ("." + "claude") not in text
 
 
+def test_powershell_installer_builds_runtime_dir_without_prompting():
+    text = (ROOT / "install.ps1").read_text(encoding="utf-8")
+    assert '$RuntimeDir = Join-Path (Join-Path $SkillDir "blog") ".venv"' in text
+    assert "Join-Path (Join-Path (Join-Path" not in text
+
+
 def test_temp_codex_home_install_and_uninstall(tmp_path):
     env = os.environ.copy()
     env["CODEX_HOME"] = str(tmp_path / ".codex")
