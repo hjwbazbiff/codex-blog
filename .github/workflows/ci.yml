@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Run tests
+        run: python -m pytest tests/
+      - name: Verify environment
+        run: python scripts/verify_environment.py --json
+      - name: Bootstrap core runtime
+        run: python scripts/bootstrap_environment.py --skip-optional --json --json-output /tmp/codex-blog-bootstrap.json
+      - name: Wrapper smoke
+        run: |
+          python scripts/run_blog_workflow.py --skill blog-analyze tests/fixtures/sample-post.md --json
+          python scripts/run_blog_workflow.py --skill blog-preflight tests/fixtures/valid-draft --json
+      - name: PowerShell installer smoke
+        if: matrix.python-version == '3.12'
+        shell: pwsh
+        run: |
+          $tmpHome = Join-Path ([System.IO.Path]::GetTempPath()) ([guid]::NewGuid().ToString())
+          $codexHome = Join-Path $tmpHome ".codex"
+          ./install.ps1 -CodexHome $codexHome
+          if (-not (Test-Path (Join-Path $codexHome "skills/blog/SKILL.md"))) {
+            throw "PowerShell installer did not install the blog skill"
+          }
+          if ((Get-ChildItem -Path (Join-Path $codexHome "skills") -Directory -Filter "blog*" | Measure-Object).Count -ne 30) {
+            throw "PowerShell installer did not install all 30 blog skills"
+          }
+          if ((Get-ChildItem -Path (Join-Path $codexHome "agents") -Filter "blog-*.toml" | Measure-Object).Count -ne 5) {
+            throw "PowerShell installer did not install all five agents"
+          }
+          ./uninstall.ps1 -CodexHome $codexHome
+          if (Test-Path (Join-Path $codexHome "skills/blog")) {
+            throw "PowerShell uninstaller left the blog skill installed"
+          }
+      - name: Stale reference audit
+        run: python -m pytest tests/test_codex_port_contracts.py -q

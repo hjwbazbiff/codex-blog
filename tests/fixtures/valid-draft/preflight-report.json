@@ -1,0 +1,109 @@
+{
+  "draft": "/srv/BazBiff2/codexblog/tests/fixtures/valid-draft",
+  "strict": true,
+  "blocked": false,
+  "gates": [
+    {
+      "gate": 1,
+      "name": "Capability Discovery",
+      "passed": true,
+      "violations": [],
+      "warnings": [
+        "no configured image-gen path (Banana MCP / GOOGLE_AI_API_KEY / UNSPLASH_ACCESS_KEY / PEXELS_API_KEY / PIXABAY_API_KEY). generate_hero.py will fall through to Openverse (no key required) and fail at runtime if Openverse is unreachable.",
+        "neither patchright nor playwright installed; Gate 3 will warn-and-pass",
+        "no PDF backend installed (patchright/playwright/weasyprint); PDF generation will fail"
+      ],
+      "capabilities": {
+        "mcp_declared": [],
+        "env_keys_present": {
+          "GOOGLE_AI_API_KEY": false,
+          "UNSPLASH_ACCESS_KEY": false,
+          "PEXELS_API_KEY": false,
+          "PIXABAY_API_KEY": false
+        },
+        "python_deps": {
+          "patchright": false,
+          "playwright": false,
+          "weasyprint": false,
+          "google.genai": true,
+          "requests": true,
+          "markdown": true
+        },
+        "project_root_files": {
+          "BRAND.md": false,
+          "VOICE.md": false,
+          "DISCOURSE.md": false
+        },
+        "agents": {
+          "blog-reviewer": true,
+          "blog-researcher": true,
+          "blog-writer": true,
+          "blog-seo": true,
+          "blog-translator": true
+        },
+        "scripts": {
+          "scripts/lint_prose.py": true,
+          "scripts/load_untrusted_root.py": true,
+          "scripts/analyze_blog.py": true
+        },
+        "image_gen_path_available": false,
+        "openverse_assumed_available": true
+      }
+    },
+    {
+      "gate": 2,
+      "name": "Format Completeness",
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "artifacts": {
+        "md": [
+          "review.md",
+          "post.md"
+        ],
+        "html": [
+          "post.html"
+        ],
+        "pdf": [
+          "post.pdf"
+        ],
+        "hero": [
+          "hero.png"
+        ],
+        "review_present": true
+      }
+    },
+    {
+      "gate": 3,
+      "name": "Visual Verification",
+      "passed": true,
+      "violations": [],
+      "warnings": [
+        "neither patchright nor playwright installed; skipping visual checks. Run pip install -e .[presentation] to enable."
+      ]
+    },
+    {
+      "gate": 4,
+      "name": "Content Review",
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "blocking": false,
+      "reason": "fixture passes"
+    },
+    {
+      "gate": 5,
+      "name": "Asset + Link Integrity",
+      "passed": true,
+      "violations": [],
+      "warnings": [
+        "no <link rel=canonical> in document"
+      ],
+      "imgs": [],
+      "links_checked": 0,
+      "json_ld_valid": true,
+      "declared_word_count": 15,
+      "actual_word_count": 15
+    }
+  ]
+}

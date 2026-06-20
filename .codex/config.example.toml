@@ -1,0 +1,16 @@
+# Copy relevant blocks into $CODEX_HOME/config.toml or a trusted project .codex/config.toml.
+# Keep real secrets in environment variables, not in this file.
+
+[mcp_servers.nanobanana]
+command = "npx"
+args = ["-y", "@ycse/nanobanana-mcp"]
+env_vars = ["GOOGLE_AI_API_KEY"]
+startup_timeout_sec = 20
+tool_timeout_sec = 120
+
+[mcp_servers.dataforseo]
+command = "npx"
+args = ["-y", "dataforseo-mcp-server"]
+env_vars = ["DATAFORSEO_USERNAME", "DATAFORSEO_PASSWORD"]
+startup_timeout_sec = 20
+tool_timeout_sec = 120

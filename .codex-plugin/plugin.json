@@ -1,0 +1,62 @@
+{
+  "name": "codex-blog",
+  "version": "1.9.1+codex.1",
+  "description": "Codex-first blog creation, review, localization, media, and publishing support with deterministic workflow wrappers.",
+  "author": {
+    "name": "AgriciDaniel",
+    "url": "https://github.com/AgriciDaniel"
+  },
+  "homepage": "https://github.com/hjwbazbiff/codex-blog",
+  "repository": "https://github.com/hjwbazbiff/codex-blog",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "codex-skills",
+    "blog",
+    "seo",
+    "content-writing",
+    "ai-citations",
+    "geo",
+    "aeo",
+    "eeat",
+    "google-search",
+    "markdown",
+    "mdx",
+    "wordpress",
+    "google-api",
+    "youtube",
+    "pagespeed",
+    "search-console",
+    "flow-framework",
+    "topic-clusters",
+    "multilingual",
+    "translation",
+    "localization",
+    "hreflang",
+    "notebooklm",
+    "audio",
+    "image-generation",
+    "content-automation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex Blog",
+    "shortDescription": "Write, audit, localize, and ship blog content in Codex.",
+    "longDescription": "Codex Blog is a Codex-native port of the 30-skill blog publishing suite from claude-blog. It bundles focused skills, five TOML agent profiles, deterministic workflow wrappers, Codex-aware installers, grouped requirements, and a preserved five-gate Blog Delivery Contract.",
+    "developerName": "AgriciDaniel, ported by hjwbazbiff",
+    "category": "Marketing",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Read",
+      "Workflow"
+    ],
+    "websiteURL": "https://github.com/hjwbazbiff/codex-blog",
+    "defaultPrompt": [
+      "Write a sourced blog post about this topic.",
+      "Audit this draft against the Blog Delivery Contract.",
+      "Translate and localize this article for German and French markets."
+    ],
+    "brandColor": "#0F766E"
+  }
+}

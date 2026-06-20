@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "codex-blog: Codex Blog Creation And Optimization Skill Suite"
+version: "1.9.1+codex.1"
+date-released: "2026-06-20"
+license: MIT
+repository-code: "https://github.com/hjwbazbiff/codex-blog"
+authors:
+  - name: Daniel Agrici
+  - name: hjwbazbiff
