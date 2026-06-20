@@ -20,5 +20,5 @@ google-analytics-data>=0.18.0,<1.0.0
 requests>=2.32.4,<3.0.0
 
 # Report generation (optional - graceful fallback if unavailable)
-matplotlib>=3.8.0,<4.0.0
+matplotlib>=3.11.0,<4.0.0
 weasyprint>=61.0,<70.0
